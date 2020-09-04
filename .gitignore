@@ -1,0 +1,5 @@
+out
+*.pdf
+node_modules
+.history
+

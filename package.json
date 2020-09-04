@@ -1,0 +1,33 @@
+{
+  "name": "puppeteer-report",
+  "version": "1.0.1",
+  "description": "create pdf report with header, footer and page number with puppeteer",
+  "main": "out/index.js",
+  "types": "out/index.d.ts",
+  "scripts": {
+    "build": "tsc && rollup -c",
+    "example": "node examples/index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "puppeteer",
+    "pdf",
+    "report",
+    "page-number"
+  ],
+  "author": "pejmanNikram",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^5.2.1",
+    "pdf-lib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^3.0.1",
+    "rollup-plugin-typescript2": "^0.27.2",
+    "typescript": "^4.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.0"
+  }
+}
