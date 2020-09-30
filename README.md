@@ -12,7 +12,7 @@ Puppeteer Report use [puppeteer](https://github.com/puppeteer/puppeteer) and [pd
 
 To support headers or footers, Puppeteer Report creates two PDF files. The first one is the HTML content without header and footer. And the second one is header and footer repeated based upon original content PDF pages' number, then it merges them together.
 
-![image](.attachment/image1.png)
+![image](https://raw.githubusercontent.com/PejmanNik/puppeteer-report/master/.attachment/image1.png)
 
 
 Want to know more about this package and how it works internally? Please read my medium post:

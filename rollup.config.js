@@ -5,7 +5,7 @@ import json from '@rollup/plugin-json';
 import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
 
-const tsconfigOverride = { compilerOptions: { module: 'es2015' } };
+const tsconfigOverride = { compilerOptions: { module: 'es2015', declaration: false } };
 
 export default {
     input: './src/core/index.ts',
