@@ -146,4 +146,4 @@ npm run example basicWithJs
 
 This package includes a `bundle.js` file that opens a door to port it to every programming language with a puppeteer package. For instance, I implemented the C# port of the Puppeteer Report here:
 
-**SOON...**
+https://github.com/PejmanNik/puppeteer-report-csharp
