@@ -98,7 +98,7 @@ You can add `onChange` event handler on the header or footer elements to manipul
 
 ### Convert To PDF
 
-Import the package and call `pdf` method. The first argument is the path to HTML in the local file system and the second one is the puppeteer PDF options object. if you don't specify a `path` in options the method returns the byte array.
+Import the package and call the `pdf` method. The first argument is the path to HTML in the local file system and the second one is the puppeteer PDF options object. the method returns the byte array. if you specify a `path` in the options object the output PDF will be saved in that path.
 
 The full documentation of options object is available in the [puppeteer doc](https://pptr.dev/#?product=Puppeteer&version=v5.0.0&show=api-pagepdfoptions)
 
@@ -106,7 +106,30 @@ The full documentation of options object is available in the [puppeteer doc](htt
 
 import report from "puppeteer-report";
 
-report.pdf("index.html"), {
+report.pdf("index.html", {
+    path: "index.pdf", 
+    format: "A4",
+    margin: {
+        bottom: '10mm',
+        left: '10mm',
+        right: '10mm',
+        top: '10mm'
+    }
+});
+
+```
+
+There is another method to create PDF. `pdfPage` method accepts a puppeteer page instance and an options object. this method lets you customize the page and even use it on none static pages.
+
+if you want to use it in `chrome-aws-lambda` this is what you need to call.
+
+```js
+
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+await page.goto("file:///...");
+
+report.pdfPage(page , {
     path: "index.pdf", 
     format: "A4",
     margin: {

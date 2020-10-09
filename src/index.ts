@@ -2,13 +2,7 @@ import * as fs from "fs";
 import * as core from "./core";
 import puppeteer, { PDFOptions } from "puppeteer";
 
-async function pdf(file: string, options?: PDFOptions): Promise<Uint8Array> {
-  const { path, ...pdfOptions } = options || {};
-  const margin = {
-    marginTop: pdfOptions?.margin?.top ?? 0,
-    marginBottom: pdfOptions?.margin?.bottom ?? 0,
-  };
-
+async function pdf(file: string, options?: PDFOptions) {
   const browser = await puppeteer.launch({
     args: [
       "--no-sandbox",
@@ -18,8 +12,24 @@ async function pdf(file: string, options?: PDFOptions): Promise<Uint8Array> {
   });
 
   const page = await browser.newPage();
-
   await page.goto("file:///" + file);
+
+  const result = await pdfPage(page, options);
+
+  await browser.close();
+
+  return result;
+}
+
+async function pdfPage(
+  page: puppeteer.Page,
+  options?: PDFOptions
+): Promise<Uint8Array> {
+  const { path, ...pdfOptions } = options ?? {};
+  const margin = {
+    marginTop: pdfOptions?.margin?.top ?? 0,
+    marginBottom: pdfOptions?.margin?.bottom ?? 0,
+  };
 
   const [getHeightFunc, getHeightArg] = core.getHeightEvaluator(
     margin.marginTop,
@@ -45,8 +55,6 @@ async function pdf(file: string, options?: PDFOptions): Promise<Uint8Array> {
 
   const headerPdfBuffer = await page.pdf(pdfOptions);
 
-  await browser.close();
-
   const result = await core.createReport(
     doc,
     headerPdfBuffer,
@@ -61,5 +69,4 @@ async function pdf(file: string, options?: PDFOptions): Promise<Uint8Array> {
   return result;
 }
 
-export default pdf;
-export { pdf };
+export { pdf, pdfPage };
