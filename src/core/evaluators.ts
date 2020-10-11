@@ -227,9 +227,15 @@ export async function getHeadersEvaluator(basePdfBuffer: Uint8Array) {
       }
     }
 
+    let elements;
+
     // fill total page
-    let elements = document.getElementsByClassName("totalPages");
+    elements = document.getElementsByClassName("totalPages");
     setElementsValue(elements, pagesCount.toString());
+
+    // fill title
+    elements = document.getElementsByClassName("title");
+    setElementsValue(elements, document.title);
   };
 
   return [doc, pageFunc, argument] as [
