@@ -10,17 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add new dependency to puppeteer-core by [@federicojasson](https://github.com/federicojasson).
-- Add eslint to project.
+- Add eslint to the project.
 - Add support of `chrome-aws-lambda` Thanks to [@federicojasson](https://github.com/federicojasson).
-- Add support of replace html header in page footer/title Thanks to [@federicojasson](https://github.com/federicojasson).
+- Add support of replacing HTML header in page footer/title Thanks to [@federicojasson](https://github.com/federicojasson).
 
 ### Changed
-- Change puppeteer as dependency to peerDependencies by [@federicojasson](https://github.com/federicojasson).
+- Change puppeteer as a dependency to peer dependencies by [@federicojasson](https://github.com/federicojasson).
 - Update readme file
 
 ### Removed
 - Remove bundle.js from npm package
-
 
 ## [1.1.0] - 2020-10-09
 ### Added
