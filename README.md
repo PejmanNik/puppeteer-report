@@ -73,7 +73,7 @@ Add `totalPages` class name to an element inside the header or footer in order t
 ```
 
 ### Title
-Add `title` class name to an element inside the header or footer in order to show the document title(<tile>) inside that element.
+Add `title` class name to an element inside the header or footer in order to show the document title (HTML title tag `<title>X</title>`) inside that element.
 
 ```html
 <div id="header">
