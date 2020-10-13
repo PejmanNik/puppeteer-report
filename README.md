@@ -6,7 +6,7 @@ Puppeteer has a very limited ability to customize the default header, footer, an
 
 Puppeteer Report adding support of customizing header, footer, and pagination to puppeteer. Also, it will let you use JavaScript code to apply customization in the converting process.
 
-## How dose it work?
+## How does it work?
 
 Puppeteer Report use [puppeteer](https://github.com/puppeteer/puppeteer) and [pdf-lib](https://github.com/Hopding/pdf-lib) under the hood to create a final PDF.
 
@@ -119,26 +119,34 @@ report.pdf("index.html", {
 
 ```
 
-There is another method to create PDF. `pdfPage` method accepts a puppeteer page instance and an options object. this method lets you customize the page and even use it on none static pages.
+This function requires `puppeteer`: `npm i --save puppeteer`.
+
+There is another method to create PDF that requires `puppeteer-core` instead of `puppeteer`.
+`pdfPage` method accepts a puppeteer page instance and an options object. this method lets you customize the page and even use it on none static pages.
 
 if you want to use it in `chrome-aws-lambda` this is what you need to call.
 
 ```js
 
 const browser = await puppeteer.launch();
-const page = await browser.newPage();
-await page.goto("file:///...");
 
-report.pdfPage(page , {
-    path: "index.pdf", 
-    format: "A4",
-    margin: {
-        bottom: '10mm',
-        left: '10mm',
-        right: '10mm',
-        top: '10mm'
-    }
-});
+try {
+  const page = await browser.newPage();
+  await page.goto("file:///...");
+  
+  report.pdfPage(page , {
+      path: "index.pdf", 
+      format: "A4",
+      margin: {
+          bottom: '10mm',
+          left: '10mm',
+          right: '10mm',
+          top: '10mm'
+      }
+  });
+} finally {
+  await browser.close();
+}
 
 ```
 

@@ -1,8 +1,17 @@
 import * as fs from "fs";
 import * as core from "./core";
-import puppeteer, { PDFOptions } from "puppeteer";
+import { Page, PDFOptions } from "puppeteer-core";
 
 async function pdf(file: string, options?: PDFOptions) {
+  let puppeteer;
+
+  try {
+    puppeteer = require("puppeteer");
+  } catch (error) {
+    console.error('puppeteer is required when using pdf(...) function');
+    throw error;
+  }
+
   const browser = await puppeteer.launch({
     args: [
       "--no-sandbox",
@@ -22,7 +31,7 @@ async function pdf(file: string, options?: PDFOptions) {
 }
 
 async function pdfPage(
-  page: puppeteer.Page,
+  page: Page,
   options?: PDFOptions
 ): Promise<Uint8Array> {
   const { path, ...pdfOptions } = options ?? {};
