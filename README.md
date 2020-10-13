@@ -72,7 +72,17 @@ Add `totalPages` class name to an element inside the header or footer in order t
 </div>
 ```
 
-**Page number and total pages only can be used in header or/and footer.**
+### Title
+Add `title` class name to an element inside the header or footer in order to show the document title(<tile>) inside that element.
+
+```html
+<div id="header">
+  <h1 class="title"></h1>
+  <h2>Header</h2>  
+</div>
+```
+
+**Page number, total pages, and title only can be used in header or/and footer.**
 
 ### JavaScript
 
@@ -102,6 +112,13 @@ Import the package and call the `pdf` method. The first argument is the path to 
 
 The full documentation of options object is available in the [puppeteer doc](https://pptr.dev/#?product=Puppeteer&version=v5.0.0&show=api-pagepdfoptions)
 
+### **NOTE**
+This function requires `puppeteer` and you need to install it manually by:
+
+```
+npm i --save puppeteer
+```
+
 ```js
 
 import report from "puppeteer-report";
@@ -119,12 +136,24 @@ report.pdf("index.html", {
 
 ```
 
-This function requires `puppeteer`: `npm i --save puppeteer`.
+There is another method to create PDF that requires `puppeteer-core` instead of `puppeteer`. 
 
-There is another method to create PDF that requires `puppeteer-core` instead of `puppeteer`.
 `pdfPage` method accepts a puppeteer page instance and an options object. this method lets you customize the page and even use it on none static pages.
 
-if you want to use it in `chrome-aws-lambda` this is what you need to call.
+### **NOTE**
+This function requires `puppeteer` or `puppeteer-core` (for `chrome-aws-lambda` you can go with puppeteer-core) and you need to install it manually by:
+
+```
+npm i --save puppeteer
+```
+or
+
+```
+npm i --save puppeteer-core
+```
+
+
+
 
 ```js
 

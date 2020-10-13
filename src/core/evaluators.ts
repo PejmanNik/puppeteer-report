@@ -23,14 +23,14 @@ export function getHeightEvaluator(
     // get element height include margins
     const getHeight = (element: HTMLElement | null) => {
       if (element) {
-        
         const styles = window.getComputedStyle(element);
-        const margin = parseFloat(styles["marginTop"]) + parseFloat(styles["marginBottom"]);
+        const margin =
+          parseFloat(styles["marginTop"]) + parseFloat(styles["marginBottom"]);
 
         // change position to ignore margin collapse
         const position = element.style.position;
         element.style.position = "absolute";
-    
+
         const height = Math.ceil(element.offsetHeight + margin);
 
         // reset element position
@@ -163,7 +163,7 @@ export async function getHeadersEvaluator(basePdfBuffer: Uint8Array) {
       elements: HTMLCollectionOf<Element>,
       value: string
     ) => {
-      for (let element of elements) {
+      for (const element of elements) {
         element.textContent = value;
       }
     };
@@ -227,15 +227,13 @@ export async function getHeadersEvaluator(basePdfBuffer: Uint8Array) {
       }
     }
 
-    let elements;
-
     // fill total page
-    elements = document.getElementsByClassName("totalPages");
-    setElementsValue(elements, pagesCount.toString());
+    const totalPagesElements = document.getElementsByClassName("totalPages");
+    setElementsValue(totalPagesElements, pagesCount.toString());
 
     // fill title
-    elements = document.getElementsByClassName("title");
-    setElementsValue(elements, document.title);
+    const titleElements = document.getElementsByClassName("title");
+    setElementsValue(titleElements, document.title);
   };
 
   return [doc, pageFunc, argument] as [

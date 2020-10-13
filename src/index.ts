@@ -8,7 +8,7 @@ async function pdf(file: string, options?: PDFOptions) {
   try {
     puppeteer = require("puppeteer");
   } catch (error) {
-    console.error('puppeteer is required when using pdf(...) function');
+    console.error("puppeteer is required when using pdf(...) function, you can install it by `npm i --save puppeteer`");
     throw error;
   }
 
@@ -20,20 +20,17 @@ async function pdf(file: string, options?: PDFOptions) {
     ],
   });
 
-  const page = await browser.newPage();
-  await page.goto("file:///" + file);
+  try {
+    const page = await browser.newPage();
+    await page.goto("file:///" + file);
 
-  const result = await pdfPage(page, options);
-
-  await browser.close();
-
-  return result;
+    return await pdfPage(page, options);
+  } finally {
+    await browser.close();
+  }
 }
 
-async function pdfPage(
-  page: Page,
-  options?: PDFOptions
-): Promise<Uint8Array> {
+async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
   const { path, ...pdfOptions } = options ?? {};
   const margin = {
     marginTop: pdfOptions?.margin?.top ?? 0,

@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-report",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "create pdf report with header, footer and page number with puppeteer",
   "main": "out/index.js",
   "types": "out/index.d.ts",
@@ -9,8 +9,9 @@
     "url": "https://github.com/PejmanNik/puppeteer-report"
   },
   "scripts": {
-    "build": "tsc && rollup -c",
-    "example": "node examples/index",
+    "build": "tsc",
+    "build-bundle": "rollup -c",
+    "example": "cd examples && npm update && node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -29,6 +30,9 @@
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "eslint": "^7.11.0",
     "rollup": "^2.29.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
