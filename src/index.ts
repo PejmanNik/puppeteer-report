@@ -41,10 +41,15 @@ async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
     margin.marginTop,
     margin.marginBottom
   );
-  const { headerHeight, footerHeight } = await page.evaluate(
+  let { headerHeight, footerHeight } = await page.evaluate(
     getHeightFunc,
     getHeightArg
   );
+
+  if (options?.scale) {
+    headerHeight *= options.scale;
+    footerHeight *= options.scale;
+  }
 
   const [basePageEvalFunc, basePageEvalArg] = core.getBaseEvaluator(
     headerHeight,
