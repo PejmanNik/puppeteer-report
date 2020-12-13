@@ -3,7 +3,8 @@ import { PDFDocument } from "pdf-lib";
 // get header and/or footer height from html
 export function getHeightEvaluator(
   marginTop: number | string,
-  marginBottom: number | string
+  marginBottom: number | string,
+  scale?: number
 ) {
   const normalizeMargin = (margin: number | string) => {
     if (typeof margin == "number") {
@@ -16,10 +17,11 @@ export function getHeightEvaluator(
   const argument = {
     marginTop: normalizeMargin(marginTop),
     marginBottom: normalizeMargin(marginBottom),
+    scale: scale ?? 1,
   };
   type ArgumentType = typeof argument;
 
-  const pageFunc = ({ marginTop, marginBottom }: ArgumentType) => {
+  const pageFunc = ({ marginTop, marginBottom, scale }: ArgumentType) => {
     // get element height include margins
     const getHeight = (element: HTMLElement | null) => {
       if (element) {
@@ -58,8 +60,8 @@ export function getHeightEvaluator(
       styleSheet.insertRule(`#footer { margin-bottom: ${marginBottom}`);
     }
 
-    const headerHeight = getHeight(header);
-    const footerHeight = getHeight(footer);
+    const headerHeight = getHeight(header) * scale;
+    const footerHeight = getHeight(footer) * scale ;
 
     return { headerHeight, footerHeight };
   };

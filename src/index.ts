@@ -8,7 +8,9 @@ async function pdf(file: string, options?: PDFOptions) {
   try {
     puppeteer = require("puppeteer");
   } catch (error) {
-    console.error("puppeteer is required when using pdf(...) function, you can install it by `npm i --save puppeteer`");
+    console.error(
+      "puppeteer is required when using pdf(...) function, you can install it by `npm i --save puppeteer`"
+    );
     throw error;
   }
 
@@ -39,17 +41,14 @@ async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
 
   const [getHeightFunc, getHeightArg] = core.getHeightEvaluator(
     margin.marginTop,
-    margin.marginBottom
+    margin.marginBottom,
+    pdfOptions?.scale
   );
-  let { headerHeight, footerHeight } = await page.evaluate(
+
+  const { headerHeight, footerHeight } = await page.evaluate(
     getHeightFunc,
     getHeightArg
   );
-
-  if (options?.scale) {
-    headerHeight *= options.scale;
-    footerHeight *= options.scale;
-  }
 
   const [basePageEvalFunc, basePageEvalArg] = core.getBaseEvaluator(
     headerHeight,
