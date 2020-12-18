@@ -233,6 +233,11 @@ export async function getHeadersEvaluator(basePdfBuffer: Uint8Array) {
     const totalPagesElements = document.getElementsByClassName("totalPages");
     setElementsValue(totalPagesElements, pagesCount.toString());
 
+    // trigger changes so JS can modify totalPages too
+    for(const element of totalPagesElements) {
+      element.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+    
     // fill title
     const titleElements = document.getElementsByClassName("title");
     setElementsValue(titleElements, document.title);
