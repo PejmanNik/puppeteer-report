@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# [2.0.2] - 2021-02-09
+
+### Added
+- Add support of puppeteer v6 and v7 by [@rafipiccolo](https://github.com/rafipiccolo).
+
 # [2.0.1] - 2020-12-13
 
 ### Fixed
