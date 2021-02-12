@@ -6,8 +6,9 @@
     <script>
         function onChange(element) {
             const pageNumberElement = element.getElementsByClassName('pageNumber')[0];
-            if (pageNumberElement.textContent === '2') {
-                pageNumberElement.style.color = 'red'
+            const totalPagesElement = element.getElementsByClassName('totalPages')[0];
+            if (pageNumberElement.textContent === totalPagesElement.textContent) {
+                element.style.color = 'red'
             }
         }
     </script>
