@@ -22,7 +22,7 @@ Want to know more about this package and how it works internally? Please read my
 
 ## How to Install
 
-Using `npm` 
+Using `npm`
 
 ```
 npm i puppeteer-report
@@ -36,7 +36,7 @@ yarn add puppeteer-report
 
 ### Header
 Add `id="header"` to the root header element in the HTML file.
- 
+
 ```html
 <div id="header">
   <h1>Header</h1>
@@ -78,11 +78,35 @@ Add `title` class name to an element inside the header or footer in order to sho
 ```html
 <div id="header">
   <h1 class="title"></h1>
-  <h2>Header</h2>  
+  <h2>Header</h2>
 </div>
 ```
 
 **Page number, total pages, and title only can be used in header or/and footer.**
+
+### CSS
+
+Styles for header/footer need to be defined in the head of the document, e.g.
+
+```html
+<html>
+  <head>
+    <style>
+      #header {
+        color: red;
+      }
+      #footer {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">foo</div>
+    bar
+    <div id="footer">baz</div>
+  </body>
+</html>
+```
 
 ### JavaScript
 
@@ -124,7 +148,7 @@ npm i --save puppeteer
 import report from "puppeteer-report";
 
 report.pdf("index.html", {
-    path: "index.pdf", 
+    path: "index.pdf",
     format: "A4",
     margin: {
         bottom: '10mm',
@@ -136,7 +160,7 @@ report.pdf("index.html", {
 
 ```
 
-There is another method to create PDF that requires `puppeteer-core` instead of `puppeteer`. 
+There is another method to create PDF that requires `puppeteer-core` instead of `puppeteer`.
 
 `pdfPage` method accepts a puppeteer page instance and an options object. this method lets you customize the page and even use it on none static pages.
 
@@ -162,9 +186,9 @@ const browser = await puppeteer.launch();
 try {
   const page = await browser.newPage();
   await page.goto("file:///...");
-  
+
   report.pdfPage(page , {
-      path: "index.pdf", 
+      path: "index.pdf",
       format: "A4",
       margin: {
           bottom: '10mm',

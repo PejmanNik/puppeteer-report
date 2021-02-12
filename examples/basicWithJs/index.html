@@ -6,8 +6,9 @@
     <script>
         function onChange(element) {
             const pageNumberElement = element.getElementsByClassName('pageNumber')[0];
-            if (pageNumberElement.textContent === '2') {
-                pageNumberElement.style.color = 'red'
+            const totalPagesElement = element.getElementsByClassName('totalPages')[0];
+            if (pageNumberElement.textContent === totalPagesElement.textContent) {
+                element.style.color = 'red'
             }
         }
     </script>
@@ -17,7 +18,7 @@
     <div id="app">
         <div id="header" onchange="onChange(this)">
             <h1>Header</h1>
-            <span class="pageNumber" />/<span class="totalPages" />
+            <span class="pageNumber"></span>/<span class="totalPages"></span>
         </div>
 
         <div style="margin-bottom: -16px;"></div>
