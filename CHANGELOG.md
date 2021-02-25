@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# [2.0.3] - 2021-02-26
+
+### Changed
+- Update the readme file and add a sample for styling by [@emilos](https://github.com/emilos).
+- Make the total page available before firing the change event.
+
 # [2.0.2] - 2021-02-09
 
 ### Added
