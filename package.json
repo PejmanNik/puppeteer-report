@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-report",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "create pdf report with header, footer and page number with puppeteer",
   "main": "out/index.js",
   "types": "out/index.d.ts",
