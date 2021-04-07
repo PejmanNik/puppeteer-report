@@ -132,7 +132,7 @@ You can add `onChange` event handler on the header or footer elements to manipul
 
 ### Convert To PDF
 
-Import the package and call the `pdf` method. The first argument is the path to HTML in the local file system and the second one is the puppeteer PDF options object. the method returns the byte array. if you specify a `path` in the options object the output PDF will be saved in that path.
+Import `pdf` method from the package and call it. The first argument is the path to HTML in the local file system and the second one is the puppeteer PDF options object. the method returns the byte array. if you specify a `path` in the options object the output PDF will be saved in that path.
 
 The full documentation of options object is available in the [puppeteer doc](https://pptr.dev/#?product=Puppeteer&version=v5.0.0&show=api-pagepdfoptions)
 
@@ -145,9 +145,9 @@ npm i --save puppeteer
 
 ```js
 
-import report from "puppeteer-report";
+import { pdf } from "puppeteer-report";
 
-report.pdf("index.html", {
+pdf("index.html", {
     path: "index.pdf",
     format: "A4",
     margin: {
@@ -181,13 +181,16 @@ npm i --save puppeteer-core
 
 ```js
 
+import { pdfPage } from "puppeteer-report";
+import puppeteer from 'puppeteer';
+
 const browser = await puppeteer.launch();
 
 try {
   const page = await browser.newPage();
   await page.goto("file:///...");
 
-  report.pdfPage(page , {
+  pdfPage(page , {
       path: "index.pdf",
       format: "A4",
       margin: {
