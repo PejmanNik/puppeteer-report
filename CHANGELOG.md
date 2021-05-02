@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# [2.0.5] - 2021-05-02
+
+### Added
+- Add support of puppeteer v9
+- Add default export for package
+
+
 # [2.0.4] - 2021-02-27
 
 ### Added
