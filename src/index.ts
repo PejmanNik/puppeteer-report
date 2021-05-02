@@ -80,3 +80,4 @@ async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
 }
 
 export { pdf, pdfPage };
+export default { pdf, pdfPage };
