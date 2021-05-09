@@ -1,37 +1,31 @@
 import * as fs from "fs";
 import * as core from "./core";
-import { Page, PDFOptions } from "puppeteer-core";
+import type { Page, Browser, PDFOptions } from "./types";
 
-async function pdf(file: string, options?: PDFOptions) {
-  let puppeteer;
-
+/**
+ * Convert HTML file to PDF
+ * @param browser puppeteer/puppeteer-core browser object
+ * @param file full path of HTML file
+ * @param options output PDF options
+ * @returns PDF as an array of bytes
+ */
+async function pdf(browser: Browser, file: string, options?: PDFOptions) {
+  const page = await browser.newPage();
   try {
-    puppeteer = require("puppeteer");
-  } catch (error) {
-    console.error(
-      "puppeteer is required when using pdf(...) function, you can install it by `npm i --save puppeteer`"
-    );
-    throw error;
-  }
-
-  const browser = await puppeteer.launch({
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage",
-    ],
-  });
-
-  try {
-    const page = await browser.newPage();
     await page.goto("file:///" + file);
 
     return await pdfPage(page, options);
   } finally {
-    await browser.close();
+    await page.close();
   }
 }
 
+/**
+ * Convert a Page to PDF
+ * @param page puppeteer/puppeteer-core page object
+ * @param options output PDF options
+ * @returns PDF as an array of bytes
+ */
 async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
   const { path, ...pdfOptions } = options ?? {};
   const margin = {

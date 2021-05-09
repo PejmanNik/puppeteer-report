@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# [3.0.0] - 2021-05-09
+### Removed
+- Remove `puppeteer`/`puppeteer-core` from package dependencies
+
+### Changed
+- Drop support of `puppeteer`/`puppeteer-core` older than version 7.0.0
+- Start using `puppeteer` built in types
+- Change `pdf` method signature to remove `puppeteer` dependency
+
+### Fixed
+- Fully support of `puppeteer`/`puppeteer-core` >= 7.0.1 and < 10.0.0
+
 # [2.0.5] - 2021-05-02
 
 ### Added

@@ -14,12 +14,6 @@ To support headers or footers, Puppeteer Report creates two PDF files. The first
 
 ![image](https://raw.githubusercontent.com/PejmanNik/puppeteer-report/master/.attachment/image1.png)
 
-
-Want to know more about this package and how it works internally? Please read my medium post:
-
-**SOON...**
-
-
 ## How to Install
 
 Using `npm`
@@ -34,7 +28,99 @@ or `yarn`
 yarn add puppeteer-report
 ```
 
+## Convert To PDF
+
+The Puppeteer Report provides two methods to convert `html` to `pdf`, both accept an option object to customize the output pdf.
+
+The full documentation of options object is available in the [puppeteer doc](https://pptr.dev/#?product=Puppeteer&version=v7.0.4&show=api-pagepdfoptions)
+
+### **NOTE**
+
+This package requires `puppeteer` or `puppeteer-core` (for `chrome-aws-lambda` you can go with puppeteer-core) and you need to install it manually by the below commands.
+
+The Puppeteer Report version 3.0.0 supports both `puppeteer` and `puppeteer-core` from version 7.0.1 until the last version.
+
+```shell
+npm i --save puppeteer
+yarn add puppeteer
+
+** OR
+
+npm i --save puppeteer-core
+yarn add puppeteer-core
+```
+
+### pdf
+
+The `pdf` method accept 3 arguments. the first argument is `puppeteer` browser object and the second one is path to HTML in the local file system and the last one is the puppeteer PDF options object. the method returns the byte array. if you specify a `path` in the options object the output PDF will be saved in that path.
+
+```js
+import report from "puppeteer-report";
+import puppeteer from "puppeteer";
+
+const browser = await puppeteer.launch({
+  args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+});
+
+try {
+  // you must use full path `home/puppeteer/index.hmtl`
+  const file = path.join(__dirname, "index.html");
+  await report.pdf(browser, file, {
+    path: "report.pdf",
+    format: "a4",
+    margin: {
+      bottom: "10mm",
+      left: "10mm",
+      right: "10mm",
+      top: "10mm",
+    },
+  });
+} finally {
+  await browser.close();
+}
+```
+
+### pdfPage
+
+The `pdfPage` method accepts a puppeteer page instance and an options object. this method lets you customize the page and even use it on none static pages. the method returns the byte array. if you specify a `path` in the options object the output PDF will be saved in that path.
+
+```js
+import report from "puppeteer-report";
+import puppeteer from "puppeteer";
+
+const browser = await puppeteer.launch({
+  args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+});
+
+try {
+  const page = await browser.newPage();
+
+  // you can use static files only with a full path
+  // and `file:///` prefix like `file:///home/puppeteer/index.html`
+  // or a website address
+  await page.goto("https://google.com");
+
+  await report.pdfPage(page, {
+    path: "report.pdf",
+    format: "a4",
+    margin: {
+      bottom: "10mm",
+      left: "10mm",
+      right: "10mm",
+      top: "10mm",
+    },
+  });
+} finally {
+  await browser.close();
+}
+```
+
+## Custimoze HTML File
+
+With Puppeteer Report you can customize the output pdf with custom HTML elements.
+
 ### Header
+
 Add `id="header"` to the root header element in the HTML file.
 
 ```html
@@ -44,6 +130,7 @@ Add `id="header"` to the root header element in the HTML file.
 ```
 
 ### Footer
+
 Add `id="footer"` to the root footer element in the HTML file.
 
 ```html
@@ -53,6 +140,7 @@ Add `id="footer"` to the root footer element in the HTML file.
 ```
 
 ### Page Number
+
 Add `pageNumber` class name to an element inside the header or footer in order to show the current page number inside that element.
 
 ```html
@@ -63,6 +151,7 @@ Add `pageNumber` class name to an element inside the header or footer in order t
 ```
 
 ### Total Pages
+
 Add `totalPages` class name to an element inside the header or footer in order to show the total page number inside that element.
 
 ```html
@@ -73,6 +162,7 @@ Add `totalPages` class name to an element inside the header or footer in order t
 ```
 
 ### Title
+
 Add `title` class name to an element inside the header or footer in order to show the document title (HTML title tag `<title>X</title>`) inside that element.
 
 ```html
@@ -114,8 +204,8 @@ You can add `onChange` event handler on the header or footer elements to manipul
 
 ```html
 <div id="header" onchange="onChange(this)">
-    <h1>Header</h1>
-    <span class="pageNumber" />/<span class="totalPages" />
+  <h1>Header</h1>
+  <span class="pageNumber" />/<span class="totalPages" />
 </div>
 ```
 
@@ -130,80 +220,7 @@ You can add `onChange` event handler on the header or footer elements to manipul
 </script>
 ```
 
-### Convert To PDF
-
-Import the package and call the `pdf` method. The first argument is the path to HTML in the local file system and the second one is the puppeteer PDF options object. the method returns the byte array. if you specify a `path` in the options object the output PDF will be saved in that path.
-
-The full documentation of options object is available in the [puppeteer doc](https://pptr.dev/#?product=Puppeteer&version=v5.0.0&show=api-pagepdfoptions)
-
-### **NOTE**
-This function requires `puppeteer` and you need to install it manually by:
-
-```
-npm i --save puppeteer
-```
-
-```js
-
-import report from "puppeteer-report";
-
-report.pdf("index.html", {
-    path: "index.pdf",
-    format: "A4",
-    margin: {
-        bottom: '10mm',
-        left: '10mm',
-        right: '10mm',
-        top: '10mm'
-    }
-});
-
-```
-
-There is another method to create PDF that requires `puppeteer-core` instead of `puppeteer`.
-
-`pdfPage` method accepts a puppeteer page instance and an options object. this method lets you customize the page and even use it on none static pages.
-
-### **NOTE**
-This function requires `puppeteer` or `puppeteer-core` (for `chrome-aws-lambda` you can go with puppeteer-core) and you need to install it manually by:
-
-```
-npm i --save puppeteer
-```
-or
-
-```
-npm i --save puppeteer-core
-```
-
-
-
-
-```js
-
-const browser = await puppeteer.launch();
-
-try {
-  const page = await browser.newPage();
-  await page.goto("file:///...");
-
-  report.pdfPage(page , {
-      path: "index.pdf",
-      format: "A4",
-      margin: {
-          bottom: '10mm',
-          left: '10mm',
-          right: '10mm',
-          top: '10mm'
-      }
-  });
-} finally {
-  await browser.close();
-}
-
-```
-
-### Run Examples
+## Run Examples
 
 Clone the repo and run these commands to install dependencies and build the package.
 
@@ -219,10 +236,10 @@ npm run example {example-folder-name}
 ```
 
 For instance, to run `basicWithJs` example, you can run this command, and then the PDF result will create in the `examples\basicWithJs` directory.
+
 ```
 npm run example basicWithJs
 ```
-
 
 ## FAQ
 

@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-report",
-  "version": "2.0.5",
+  "version": "3.0.0",
   "description": "create pdf report with header, footer and page number with puppeteer",
   "main": "out/index.js",
   "types": "out/index.d.ts",
@@ -23,24 +23,19 @@
   "author": "pejmanNikram",
   "license": "MIT",
   "dependencies": {
-    "@types/puppeteer": "^3.0.1",
-    "@types/puppeteer-core": "^2.0.0",
-    "pdf-lib": "^1.10.0",
-    "puppeteer-core": "^5.2.1"
+    "pdf-lib": "^1.16.0"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
-    "@typescript-eslint/eslint-plugin": "^4.4.1",
-    "@typescript-eslint/parser": "^4.4.1",
-    "eslint": "^7.11.0",
-    "rollup": "^2.29.0",
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
+    "eslint": "^7.25.0",
+    "puppeteer-core": "7.0.4",
+    "rollup": "^2.47.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^7.0.0",
-    "rollup-plugin-typescript2": "^0.27.2",
-    "typescript": "^4.0.0"
-  },
-  "peerDependencies": {
-    "puppeteer": ">=5.2.1 <10.0.0"
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.2.4"
   }
 }
