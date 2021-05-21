@@ -119,8 +119,7 @@ export function getBaseEvaluator(headerHeight: number, footerHeight: number) {
       isTop: boolean
     ) => {
       if (element) {
-        element.style.visibility = "hidden";
-        element.style.position = "absolute";
+        element.style.display = "none";
 
         if (isTop) {
           styleSheet.insertRule(`@page { margin-top: ${height}px}`);
@@ -172,8 +171,7 @@ export async function getHeadersEvaluator(basePdfBuffer: Uint8Array) {
 
     const resetStyle = (element: HTMLElement | null) => {
       if (element) {
-        element.style.visibility = "visible";
-        element.style.position = "static";
+        element.style.display = "block";
       }
     };
 
