@@ -12,7 +12,7 @@
     "build": "tsc",
     "build-bundle": "rollup -c",
     "example": "npm run build && cd examples && node index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && ava"
   },
   "keywords": [
     "puppeteer",
@@ -29,6 +29,7 @@
     "@rollup/plugin-json": "^4.1.0",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
+    "ava": "^3.15.0",
     "eslint": "^7.26.0",
     "puppeteer": "^9.1.1",
     "puppeteer-core": "^9.1.1",
