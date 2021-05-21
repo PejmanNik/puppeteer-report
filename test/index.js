@@ -29,7 +29,7 @@ test("it generates a pdf", async assert => {
   await browser.close()
 })
 
-test.skip("it does not generates additional blank pages", async assert => {
+test("it does not generate additional blank pages", async assert => {
   const browser = await puppeteer.launch()
   const input = join(__dirname, 'fixtures', 'multiple-pages.html')
   const output = join(tmpdir(), 'multiple-pages.pdf')
