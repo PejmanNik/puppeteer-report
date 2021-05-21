@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc",
     "build-bundle": "rollup -c",
-    "example": "cd examples && node index",
+    "example": "npm run build && cd examples && node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -27,12 +27,12 @@
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
-    "@typescript-eslint/eslint-plugin": "^4.22.1",
-    "@typescript-eslint/parser": "^4.22.1",
-    "eslint": "^7.25.0",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "eslint": "^7.26.0",
     "puppeteer": "^9.1.1",
     "puppeteer-core": "^9.1.1",
-    "rollup": "^2.47.0",
+    "rollup": "^2.48.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
