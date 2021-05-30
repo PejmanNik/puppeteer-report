@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Test</title>
+    <script>
+        function onChange(element) {
+            const pageNumberElement = element.getElementsByClassName('pageNumber')[0];
+            const totalPagesElement = element.getElementsByClassName('totalPages')[0];
+            if (pageNumberElement.textContent === totalPagesElement.textContent) {
+                element.style.color = 'red'
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="header" onchange="onChange(this)">
+            <h1>Header</h1>
+            <p>Header line 1</p>
+            <p>Header line 2</p>
+            <span class="pageNumber"></span>/<span class="totalPages"></span>
+        </div>
+
+        <p>test 1 </p>
+        <p>test 2 </p>
+        <p>test 3 </p>
+        <p>test 4 </p>
+        <p>test 5 </p>
+        <p>test 6 </p>
+        <p>test 7 </p>
+        <p>test 8 </p>
+        <p>test 9 </p>
+        <p>test 10 </p>
+        <p>test 11 </p>
+        <p>test 12 </p>
+        <p>test 13 </p>
+        <p>test 14 </p>
+        <p>test 15 </p>
+        <p>test 16 </p>
+        <p>test 17 </p>
+        <p>test 18 </p>
+        <p>test 19 </p>
+        <p>test 20 </p>
+        <p>test 21 </p>
+        <p>test 22 </p>
+        <p>test 23 </p>
+        <p>test 24 </p>
+        <p>test 25 </p>
+        <p>test 26 </p>
+        <p>test 27 </p>
+        <p>test 28 </p>
+        <p>test 29 </p>
+        <p>test 30 </p>
+        <p>test 31 </p>
+        <p>test 32 </p>
+        <p>test 33 </p>
+        <p>test 34 </p>
+        <p>test 35 </p>
+        <p>test 36 </p>
+        <p>test 37 </p>
+        <p>test 38 </p>
+        <p>test 39 </p>
+        <p>test 40 </p>
+        <p>test 41 </p>
+        <p>test 42 </p>
+        <p>test 43 </p>
+        <p>test 44 </p>
+        <p>test 45 </p>
+        <p>test 46 </p>
+        <p>test 47 </p>
+        <p>test 48 </p>
+        <p>test 49 </p>
+        <p>test 50 </p>
+        <p>test 51 </p>
+        <p>test 52 </p>
+        <p>test 53 </p>
+        <p>test 54 </p>
+        <p>test 55 </p>
+
+        <div id="footer" onchange="onChange(this)">
+            <h1>Footer</h1>
+            <p>Footer line 1</p>
+            <p>Footer line 2</p>
+            <p>Footer line 3</p>
+            <p>Footer line 4</p>
+            <p>Footer line 5</p>
+            <p>Footer line 6</p>
+            <p>Footer line 7</p>
+            <p>Footer line 8</p>
+            <span class="pageNumber"></span>/<span class="totalPages"></span>
+        </div>
+    </div>
+</body>
+
+</html>
