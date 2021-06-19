@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-report",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "create pdf report with header, footer and page number with puppeteer",
   "main": "out/index.js",
   "types": "out/index.d.ts",
@@ -30,7 +30,6 @@
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1",
     "eslint": "^7.25.0",
-    "puppeteer-core": "7.0.4",
     "rollup": "^2.47.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
