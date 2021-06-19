@@ -33,12 +33,12 @@ export function getHeightEvaluator(
         const position = element.style.position;
         element.style.position = "absolute";
 
-        const height = Math.ceil(element.offsetHeight + margin);
+        const height = element.offsetHeight + margin;
 
         // reset element position
         element.style.position = position;
 
-        return height;
+        return Math.ceil(height * scale);
       }
       return 0;
     };
@@ -60,8 +60,8 @@ export function getHeightEvaluator(
       styleSheet.insertRule(`#footer { margin-bottom: ${marginBottom}`);
     }
 
-    const headerHeight = getHeight(header) * scale;
-    const footerHeight = getHeight(footer) * scale ;
+    const headerHeight = getHeight(header);
+    const footerHeight = getHeight(footer);
 
     return { headerHeight, footerHeight };
   };
