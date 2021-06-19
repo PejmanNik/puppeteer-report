@@ -1,4 +1,4 @@
-import { PDFDocument } from "pdf-lib";
+import { PDFDocument, BlendMode } from "pdf-lib";
 
 export async function createReport(
   baseDoc: PDFDocument,
@@ -70,6 +70,7 @@ export async function createReport(
         ...size,
         x: x - size.width,
         y: y - size.height,
+        blendMode: BlendMode.Multiply
       });
     }
 
@@ -78,6 +79,7 @@ export async function createReport(
         ...size,
         x: x - size.width,
         y: 0,
+        blendMode: BlendMode.Multiply
       });
     }
 
