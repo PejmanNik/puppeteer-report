@@ -67,7 +67,7 @@ async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
   meta_item = await page.evaluate(() => { var _el = document.querySelector('head meta[name=subject]'); return _el ? _el.content : null });
   if (meta_item) doc.setSubject(meta_item);
   meta_item = await page.evaluate(() => { var _el = document.querySelector('head meta[name=keywords]'); return _el ? _el.content : null });
-  if (meta_item) doc.setKeywords(meta_item);
+  if (meta_item) doc.setKeywords(meta_item.split(","));
 
   const result = await core.createReport(
     doc,
