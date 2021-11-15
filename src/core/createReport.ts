@@ -100,5 +100,5 @@ export async function createReport(
     }
   }
 
-  return await baseDoc.save();
+  return await baseDoc.save({ useObjectStreams: false });
 }
