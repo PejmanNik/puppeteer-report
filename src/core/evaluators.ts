@@ -153,9 +153,8 @@ export function getBaseEvaluator(headerHeight: number, footerHeight: number) {
 //  ------------
 // |  header 2  |
 //       ...
-export async function getHeadersEvaluator(basePdfBuffer: Uint8Array) {
-  const doc = await PDFDocument.load(basePdfBuffer);
-  const argument = { pagesCount: doc.getPageCount() };
+export async function getHeadersEvaluator(pagesCount: number) {
+  const argument = { pagesCount };
   type ArgumentType = typeof argument;
 
   const pageFunc = ({ pagesCount }: ArgumentType) => {
@@ -203,10 +202,10 @@ export async function getHeadersEvaluator(basePdfBuffer: Uint8Array) {
     };
 
     const header = document.getElementById("header");
-    const footer = document.getElementById("footer");
+    // const footer = document.getElementById("footer");
 
     resetStyle(header);
-    resetStyle(footer);
+    // resetStyle(footer);
 
     // clear the page content
     document.body.innerHTML = "";
@@ -226,6 +225,90 @@ export async function getHeadersEvaluator(basePdfBuffer: Uint8Array) {
       if (header) {
         cloneElement(header, (i + 1).toString());
       }
+      // if (footer) {
+      //   cloneElement(footer, (i + 1).toString());
+      // }
+    }
+
+    // fill title
+    const titleElements = document.getElementsByClassName("title");
+    setElementsValue(titleElements, document.title);
+  };
+
+  return [pageFunc, argument] as [
+    pageFunc: typeof pageFunc,
+    argument: ArgumentType
+  ];
+}
+export async function getFootersEvaluator(pagesCount: number) {
+  const argument = { pagesCount };
+  type ArgumentType = typeof argument;
+
+  const pageFunc = ({ pagesCount }: ArgumentType) => {
+    // set a value for all selected elements
+    const setElementsValue = (
+      elements: HTMLCollectionOf<Element>,
+      value: string
+    ) => {
+      for (const element of elements) {
+        element.textContent = value;
+      }
+    };
+
+    const resetStyle = (element: HTMLElement | null) => {
+      if (element) {
+        element.style.display = "block";
+      }
+    };
+
+    // add a page break after each element
+    const addPageBreak = () => {
+      const pageBreak = document.createElement("div");
+      pageBreak.style.pageBreakAfter = "always";
+      document.body.appendChild(pageBreak);
+    };
+
+    // duplicate an element in the page
+    const cloneElement = (element: HTMLElement, pageNumber: string) => {
+      const cloned = element.cloneNode(true) as Document;
+
+      // fill pageNumber
+      const pageNumberElements = cloned.getElementsByClassName("pageNumber");
+      setElementsValue(pageNumberElements, pageNumber);
+
+      // fill total page
+      const totalPagesElements = cloned.getElementsByClassName("totalPages");
+      setElementsValue(totalPagesElements, pagesCount.toString());
+
+      document.body.appendChild(cloned);
+
+      // trigger element onchange to support JS
+      cloned.dispatchEvent(new Event("change", { bubbles: true }));
+
+      addPageBreak();
+    };
+
+    // const header = document.getElementById("header");
+    const footer = document.getElementById("footer");
+
+    resetStyle(footer);
+    // resetStyle(footer);
+
+    // clear the page content
+    document.body.innerHTML = "";
+
+    // remove page margin
+    const styleEl = document.getElementById("page__style") as HTMLStyleElement;
+    const styleSheet = styleEl.sheet!;
+    while (styleSheet.rules.length > 0) {
+      styleSheet.deleteRule(0);
+    }
+
+    // inject new style
+    styleSheet.insertRule(`@page { margin-top: 0; margin-bottom:0; }`);
+
+    // duplicate the header and footer element for each page
+    for (let i = 0; i < pagesCount; i++) {
       if (footer) {
         cloneElement(footer, (i + 1).toString());
       }
@@ -236,8 +319,7 @@ export async function getHeadersEvaluator(basePdfBuffer: Uint8Array) {
     setElementsValue(titleElements, document.title);
   };
 
-  return [doc, pageFunc, argument] as [
-    doc: typeof doc,
+  return [pageFunc, argument] as [
     pageFunc: typeof pageFunc,
     argument: ArgumentType
   ];

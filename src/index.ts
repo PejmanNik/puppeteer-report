@@ -1,6 +1,7 @@
-import * as fs from "fs";
-import * as core from "./core";
-import type { Page, Browser, PDFOptions } from "./types";
+import * as fs from 'fs';
+import { PDFDocument } from 'pdf-lib';
+import * as core from './core';
+import type { Page, Browser, PDFOptions } from './types';
 
 /**
  * Convert HTML file to PDF
@@ -12,7 +13,7 @@ import type { Page, Browser, PDFOptions } from "./types";
 async function pdf(browser: Browser, file: string, options?: PDFOptions) {
   const page = await browser.newPage();
   try {
-    await page.goto("file:///" + file);
+    await page.goto('file:///' + file);
 
     return await pdfPage(page, options);
   } finally {
@@ -48,20 +49,34 @@ async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
     headerHeight,
     footerHeight
   );
+
   await page.evaluate(basePageEvalFunc, basePageEvalArg);
 
+  // Store base HTML as it was after page evaluation
+  const contentAfterBase =  await page.content();
+
+  // Generates PDF without headers and footers
   const basePdfBuffer = await page.pdf(pdfOptions);
 
-  const [doc, headerEvalFunc, headerEvalArg] = await core.getHeadersEvaluator(
-    basePdfBuffer
-  );
-  await page.evaluate(headerEvalFunc, headerEvalArg);
+  // Get pages here
+  const doc = await PDFDocument.load(basePdfBuffer);
+  const pagesCount = doc.getPageCount();
 
+  // Evaluate headers and render them to PDF
+  await page.evaluate(...(await core.getHeadersEvaluator(pagesCount)));
   const headerPdfBuffer = await page.pdf(pdfOptions);
+
+  // Restore content as it was before header evaluation (it mutates it)
+  await page.setContent(contentAfterBase);
+  
+  // Evaluate footers and render them to PDF
+  await page.evaluate(...(await core.getFootersEvaluator(pagesCount)));
+  const footerPdfBuffer = await page.pdf(pdfOptions);
 
   const result = await core.createReport(
     doc,
     headerPdfBuffer,
+    footerPdfBuffer,
     headerHeight,
     footerHeight
   );
@@ -72,6 +87,5 @@ async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
 
   return result;
 }
-
 export { pdf, pdfPage };
 export default { pdf, pdfPage };

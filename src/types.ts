@@ -140,6 +140,8 @@ export interface PDFOptions {
 
 export interface Page {
   pdf(options?: PDFOptions): Promise<Buffer>;
+  content(): Promise<string>;
+  setContent(content: string): Promise<void>;
   goto(url: string): Promise<unknown>;
   close(): Promise<void>;
   evaluate<T extends EvaluateFn>(
