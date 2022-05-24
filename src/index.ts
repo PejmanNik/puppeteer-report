@@ -60,12 +60,12 @@ async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
   const headerPdfBuffer = await page.pdf(pdfOptions);
 
   const metaData = await page.evaluate(() => {
-    {
-      title:    document.querySelector('head > title')?.innerText,
-      author:   document.querySelector('head meta[name=author]')?.innerText,
-      subject:  document.querySelector('head meta[name=subject]')?.innerText,
-      keywords: document.querySelector('head meta[name=keywords]')?.innerText?.split(','),
-    }
+    return {
+      title:    (<HTMLElement>document.querySelector('head > title'))?.innerText,
+      author:   (<HTMLElement>document.querySelector('head meta[name=author]'))?.innerText,
+      subject:  (<HTMLElement>document.querySelector('head meta[name=subject]'))?.innerText,
+      keywords: (<HTMLElement>document.querySelector('head meta[name=keywords]'))?.innerText?.split(','),
+    };
   });
   if (metaData) {
     if (metaData.title)    doc.setTitle(metaData.title);
