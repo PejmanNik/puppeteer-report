@@ -59,15 +59,20 @@ async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
 
   const headerPdfBuffer = await page.pdf(pdfOptions);
 
-  let meta_item;
-  meta_item = await page.evaluate(() => { var _el = document.querySelector('head > title'); return _el ? _el.innerText : null });
-  if (meta_item) doc.setTitle(meta_item);
-  meta_item = await page.evaluate(() => { var _el = document.querySelector('head meta[name=author]'); return _el ? _el.content : null });
-  if (meta_item) doc.setAuthor(meta_item);
-  meta_item = await page.evaluate(() => { var _el = document.querySelector('head meta[name=subject]'); return _el ? _el.content : null });
-  if (meta_item) doc.setSubject(meta_item);
-  meta_item = await page.evaluate(() => { var _el = document.querySelector('head meta[name=keywords]'); return _el ? _el.content : null });
-  if (meta_item) doc.setKeywords(meta_item.split(","));
+  const metaData = await page.evaluate(() => {
+    {
+      title:    document.querySelector('head > title')?.innerText,
+      author:   document.querySelector('head meta[name=author]')?.innerText,
+      subject:  document.querySelector('head meta[name=subject]')?.innerText,
+      keywords: document.querySelector('head meta[name=keywords]')?.innerText?.split(','),
+    }
+  });
+  if (metaData) {
+    if (metaData.title)    doc.setTitle(metaData.title);
+    if (metaData.author)   doc.setAuthor(metaData.author);
+    if (metaData.subject)  doc.setSubject(metaData.subject);
+    if (metaData.keywords) doc.setKeywords(metaData.keywords);
+  }
 
   const result = await core.createReport(
     doc,
