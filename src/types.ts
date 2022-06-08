@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// all types copied from puppeteer 7.0.4 type system 
+// all types copied from puppeteer 14.3.0 type system
 // in order to remove dependency on any specific version
 // of puppeteer/puppeteer-core
 
-
 // TODO: make a script to automatically copy data
 // import type { Page, Browser, PDFOptions } from "puppeteer-core";
-
-
 
 interface JSONObject {
   [key: string]: Serializable;
@@ -20,7 +17,7 @@ type Serializable =
   | string
   | boolean
   | null
-  | BigInt
+  | bigint
   | JSONArray
   | JSONObject;
 
