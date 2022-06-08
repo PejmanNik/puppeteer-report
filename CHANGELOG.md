@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# [3.0.3] - 2022-06-08
+
+### Changed
+
+- Update local type based on puppeteer v14.3.0
+
 # [3.0.2] - 2022-03-20
+
 ### Changed
 
 - Update PDFOptions based on puppeteer v10.4.0
