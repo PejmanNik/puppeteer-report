@@ -171,7 +171,7 @@ export async function getHeadersEvaluator(basePdfBuffer: Uint8Array) {
 
     const resetStyle = (element: HTMLElement | null) => {
       if (element) {
-        element.style.display = "block";
+        element.style.display = "";
       }
     };
 
