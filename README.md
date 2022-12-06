@@ -6,6 +6,17 @@ Puppeteer has a very limited ability to customize the default header, footer, an
 
 Puppeteer Report adding support of customizing header, footer, and pagination to puppeteer. Also, it will let you use JavaScript code to apply customization in the converting process.
 
+---
+**🐱‍💻 Need more advanced options**?
+
+
+Try the next generation of this project: [jikji](https://github.com/PejmanNik/jikji)
+
+It supports serve-side generation with Node (like this project) and Client-side rendering with React. jikji provides a 100% customizable layout handler. you can find the documentation at [jikji.xyz](https://jikji.xyz).
+<br>
+<br>
+<br>
+
 ## How does it work?
 
 Puppeteer Report use [puppeteer](https://github.com/puppeteer/puppeteer) and [pdf-lib](https://github.com/Hopding/pdf-lib) under the hood to create a final PDF.
