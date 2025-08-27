@@ -93,7 +93,7 @@ try {
 
 ### pdfPage
 
-The `pdfPage` method accepts a puppeteer page instance and an options object. this method lets you customize the page and even use it on none static pages. the method returns the byte array. if you specify a `path` in the options object the output PDF will be saved in that path.
+The `pdfPage` method accepts a puppeteer page instance and an options object. this method lets you customize the page and even use it on non-static pages. The method returns a byte array. If you specify a `path` in the options object the output PDF will be saved in that path.
 
 ```js
 import report from "puppeteer-report";
@@ -126,13 +126,13 @@ try {
 }
 ```
 
-## Custimoze HTML File
+## Customize HTML File
 
 With Puppeteer Report you can customize the output pdf with custom HTML elements.
 
 ### Header
 
-Add `id="header"` to the root header element in the HTML file.
+Add the `id="header"` to the root header element in the HTML file.
 
 ```html
 <div id="header">
@@ -142,7 +142,7 @@ Add `id="header"` to the root header element in the HTML file.
 
 ### Footer
 
-Add `id="footer"` to the root footer element in the HTML file.
+Add the `id="footer"` to the root footer element in the HTML file.
 
 ```html
 <div id="footer">
@@ -152,7 +152,7 @@ Add `id="footer"` to the root footer element in the HTML file.
 
 ### Page Number
 
-Add `pageNumber` class name to an element inside the header or footer in order to show the current page number inside that element.
+Add the `pageNumber` class name to an element inside the header or footer in order to show the current page number inside that element.
 
 ```html
 <div id="footer">
@@ -163,7 +163,7 @@ Add `pageNumber` class name to an element inside the header or footer in order t
 
 ### Total Pages
 
-Add `totalPages` class name to an element inside the header or footer in order to show the total page number inside that element.
+Add the `totalPages` class name to an element inside the header or footer in order to show the total page number inside that element.
 
 ```html
 <div id="footer">
@@ -174,7 +174,7 @@ Add `totalPages` class name to an element inside the header or footer in order t
 
 ### Title
 
-Add `title` class name to an element inside the header or footer in order to show the document title (HTML title tag `<title>X</title>`) inside that element.
+Add the `title` class name to an element inside the header or footer in order to show the document title (HTML title tag `<title>X</title>`) inside that element.
 
 ```html
 <div id="header">
@@ -183,7 +183,7 @@ Add `title` class name to an element inside the header or footer in order to sho
 </div>
 ```
 
-**Page number, total pages, and title only can be used in header or/and footer.**
+**Page number, total pages, and title can only be used in header or/and footer.**
 
 ### CSS
 
