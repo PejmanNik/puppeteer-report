@@ -1,6 +1,3 @@
-//TODO: puppeteer-core types differ from puppeteer
-// https://github.com/puppeteer/puppeteer/issues/6904
-
 import type { PDFOptions, Awaitable, WaitForOptions} from "puppeteer-core";
 export type { PDFOptions } from "puppeteer-core";
 
@@ -14,7 +11,7 @@ type EvaluateFunc<T extends unknown[]> = (
 ) => Awaitable<unknown>;
 
 export interface Page {
-  pdf(options?: PDFOptions): Promise<Buffer>;
+  pdf(options?: PDFOptions): Promise<Uint8Array>;
   close(): Promise<void>;
   goto(
     url: string,

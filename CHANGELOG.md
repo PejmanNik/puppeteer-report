@@ -8,12 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
-# [3.1.0] - 2022-12-06
+
+# [3.2.0] - 2025-08-30
 
 ### Changed
 
 - Add puppeteer-core to project dependencies
 - Update type based on puppeteer >= v18.0.0
+- Upgrade all dependencies  
+- Inject Page meta to PDF 
 
 
 # [3.0.3] - 2022-06-08
