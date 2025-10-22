@@ -27,7 +27,7 @@ async function pdf(browser: Browser, file: string, options?: PDFOptions) {
  * @returns PDF as an array of bytes
  */
 async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
-  const { path, ...pdfOptions } = options ?? {};
+  const { path, overlayHeaderFooterInMargins = false, ...pdfOptions } = options ?? {};
   const margin = {
     marginTop: pdfOptions?.margin?.top ?? 0,
     marginBottom: pdfOptions?.margin?.bottom ?? 0,
@@ -36,7 +36,8 @@ async function pdfPage(page: Page, options?: PDFOptions): Promise<Uint8Array> {
   const [getHeightFunc, getHeightArg] = core.getHeightEvaluator(
     margin.marginTop,
     margin.marginBottom,
-    pdfOptions?.scale
+    pdfOptions?.scale,
+    overlayHeaderFooterInMargins
   );
 
   const { headerHeight, footerHeight } = await page.evaluate(
