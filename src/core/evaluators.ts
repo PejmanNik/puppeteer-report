@@ -4,7 +4,8 @@ import { PDFDocument } from "pdf-lib";
 export function getHeightEvaluator(
   marginTop: number | string,
   marginBottom: number | string,
-  scale?: number
+  scale?: number,
+  overlayHeaderFooterInMargins?: boolean
 ) {
   const normalizeMargin = (margin: number | string) => {
     if (typeof margin == "number") {
@@ -18,10 +19,11 @@ export function getHeightEvaluator(
     marginTop: normalizeMargin(marginTop),
     marginBottom: normalizeMargin(marginBottom),
     scale: scale ?? 1,
+    overlayHeaderFooterInMargins,
   };
   type ArgumentType = typeof argument;
 
-  const pageFunc = ({ marginTop, marginBottom, scale }: ArgumentType) => {
+  const pageFunc = ({ marginTop, marginBottom, scale, overlayHeaderFooterInMargins }: ArgumentType) => {
     // get element height include margins
     const getHeight = (element: HTMLElement | null) => {
       if (element) {
@@ -52,12 +54,14 @@ export function getHeightEvaluator(
     document.head.appendChild(styleEl);
     const styleSheet = styleEl.sheet!;
 
-    // to respect user-defined PDF margins,
-    if (header) {
-      styleSheet.insertRule(`#header { margin-top: ${marginTop}`);
-    }
-    if (footer) {
-      styleSheet.insertRule(`#footer { margin-bottom: ${marginBottom}`);
+    // optionally apply margins to header/footer elements
+    if (!overlayHeaderFooterInMargins) {
+      if (header) {
+        styleSheet.insertRule(`#header { margin-top: ${marginTop}`);
+      }
+      if (footer) {
+        styleSheet.insertRule(`#footer { margin-bottom: ${marginBottom}`);
+      }
     }
 
     const headerHeight = getHeight(header);
