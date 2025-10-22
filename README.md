@@ -126,6 +126,38 @@ try {
 }
 ```
 
+### Advanced Options
+
+#### overlayHeaderFooterInMargins
+
+By default, the page margins you specify are added as spacing within the header/footer area. This means if you set a `20mm` top margin, the header will include that 20mm as spacing above the header content.
+
+If you want headers and footers to be placed directly at the page edges and use the margins as a protective area for your content, set `overlayHeaderFooterInMargins` to `true`:
+
+```js
+await report.pdfPage(page, {
+  path: "report.pdf",
+  format: "a4",
+  margin: {
+    bottom: "20mm",
+    left: "10mm",
+    right: "10mm",
+    top: "20mm",
+  },
+  overlayHeaderFooterInMargins: true, // Headers/footers overlay the margin area
+});
+```
+
+**When `false` (default):**
+- Margins are added as spacing within the header/footer area
+- Header/footer content is inset from the page edges
+- Current behavior (backward compatible)
+
+**When `true`:**
+- Headers/footers are placed at the absolute page edges
+- Content area respects the defined margins
+- Useful when you want margins to protect content from header/footer overlap
+
 ## Customize HTML File
 
 With Puppeteer Report you can customize the output pdf with custom HTML elements.
