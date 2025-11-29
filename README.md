@@ -1,21 +1,21 @@
 # Puppeteer Report
 
+---
+## ⚠️ THIS PROJECT IS IN MAINTENANCE MODE
+
+this library will be deprecated soon. Please migrate to the [Paprize](https://paprize.page).
+
+The migration should be straightforward when using the Paprize Zero Config library.
+Paprize offers more features and goes beyond this library limitations. All previously reported issues have been resolved in Paprize.
+
+-------
+
+
 Puppeteer Report is another library for converting HTML to PDF using puppeteer, adding support of custom header, footer, and pagination.
 
 Puppeteer has a very limited ability to customize the default header, footer, and pagination, however, it is the best tool available to convert HTML to PDF (supports the last version of CSS/HTML/JavaScript and fully Unicode characters) and make it possible to create fantastic reports using hundred of JavaScript/HTML/CSS tools, libraries, and templates.
 
 Puppeteer Report adding support of customizing header, footer, and pagination to puppeteer. Also, it will let you use JavaScript code to apply customization in the converting process.
-
----
-**🐱‍💻 Need more advanced options**?
-
-
-Try the next generation of this project: [jikji](https://github.com/PejmanNik/jikji)
-
-It supports serve-side generation with Node (like this project) and Client-side rendering with React. jikji provides a 100% customizable layout handler. you can find the documentation at [jikji.xyz](https://jikji.xyz).
-<br>
-<br>
-<br>
 
 ## How does it work?
 
